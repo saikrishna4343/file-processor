@@ -1,0 +1,12 @@
+spring:
+  application:
+   name: file-processor
+  datasource:
+    url: jdbc:mysql://localhost:13306/file_processor
+    username: root
+    password: password
+    driverClassName: com.mysql.jdbc.Driver
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
