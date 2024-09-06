@@ -5,10 +5,9 @@ import com.file_processor.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/v1/user")
@@ -22,4 +21,27 @@ public class UserController {
     public UserVO addNewUser(@RequestBody UserVO userVO){
         return userService.saveUser(userVO);
     }
+
+    @PostMapping(path = "/add/multiple")
+    public List<UserVO> addListOfUsers(@RequestBody List<UserVO> userVOList){
+        return userService.addingMultipleUsers(userVOList);
+
+    }
+
+    @GetMapping(path = "/get-details")
+    public UserVO getUserDetails(@RequestParam(name = "userId") String userId) {
+            return userService.getUserDetails(userId);
+    }
+
+    @PutMapping(path = "/update-details")
+    public UserVO updateUserDetails(@RequestParam(name = "userId") String userId, @RequestBody UserVO userVO){
+        return userService.updateUserDetails(userId,userVO);
+    }
+
+    @PutMapping(path = "/deactivate-user")
+    public UserVO deActivateAccount(@RequestParam(name = "userId") String userId){
+        return userService.deActivateUserAccount(userId);
+    }
+
+
 }
